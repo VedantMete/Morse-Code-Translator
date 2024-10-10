@@ -1,8 +1,11 @@
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class MorseCodeTransGUI extends JFrame {
+public class MorseCodeTransGUI extends JFrame implements KeyListener {
+    private MorseCodeController morseCodeController;
     private JTextArea textInputArea, morseCodeArea;
     public MorseCodeTransGUI(){
         super("Morse Code Translator");
@@ -12,6 +15,7 @@ public class MorseCodeTransGUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.decode("#C62E2E"));
         setLocationRelativeTo(null);
+        morseCodeController = new MorseCodeController();
         addGuiComponent();
     }
     private void addGuiComponent(){
@@ -26,6 +30,7 @@ public class MorseCodeTransGUI extends JFrame {
         textInputLabel.setBounds(20,100,200,30);
         textInputArea = new JTextArea();
         textInputArea.setFont(new Font("Dialog",Font.PLAIN,18));
+        textInputArea.addKeyListener(this);
         textInputArea.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         textInputArea.setLineWrap(true);
         textInputArea.setWrapStyleWord(true);
@@ -48,5 +53,23 @@ public class MorseCodeTransGUI extends JFrame {
         add(textInputScroll);
         add(morseCodeInputLabel);
         add(morseCodeScroll);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() != KeyEvent.VK_SHIFT){
+            String inputText = textInputArea.getText();
+            morseCodeArea.setText(morseCodeController.translateToMorse(inputText));
+        }
     }
 }
