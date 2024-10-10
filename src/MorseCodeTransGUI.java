@@ -15,6 +15,8 @@ public class MorseCodeTransGUI extends JFrame implements KeyListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.decode("#C62E2E"));
         setLocationRelativeTo(null);
+        Image icon = Toolkit.getDefaultToolkit().getImage("logo.jpg");
+        setIconImage(icon);
         morseCodeController = new MorseCodeController();
         addGuiComponent();
     }
